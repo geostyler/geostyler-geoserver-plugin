@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  geoserver:
+    build:
+      context: ./geoserver
+    ports:
+      - 8080:8080
+    environment:
+      EXTRA_JAVA_OPTS: -Xms1g -Xmx2g
+    volumes:
+      - ./geoserver/geoserver_data:/opt/geoserver_data/:Z
+      - ./geoserver/additional_libs:/opt/additional_libs/:Z

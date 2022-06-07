@@ -1,0 +1,50 @@
+{
+  "name": "geoserver-geostyler-module",
+  "version": "0.0.2",
+  "description": "GeoStyler - GeoServer integration",
+  "author": "terrestris GmbH & Co. KG <info@terrestris.de>",
+  "contributors": [
+    "Andreas Schmitz <schmitz@terrestris.de>",
+    "André Henn <henn@terrestris.de>",
+    "Kai Volland <volland@terrestris.de>",
+    "Nils Bühner <buehner@terrestris.de>",
+    "Johannes Weskamm <weskamm@terrestris.de>"
+  ],
+  "scripts": {
+    "lint": "eslint -c .eslintrc --ext ftl ../../../../../../../resources/org/geoserver/wms/web/data/",
+    "update": "node ./npm-update-libs.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/geoserver/geoserver.git"
+  },
+  "keywords": [
+    "GeoServer",
+    "GeoStyler",
+    "Style",
+    "SLD"
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/geoserver/geoserver/issues"
+  },
+  "homepage": "https://github.com/geoserver/geoserver#readme",
+  "browserslist": [
+    ">1%",
+    "last 4 versions",
+    "Firefox ESR",
+    "not ie < 9"
+  ],
+  "dependencies": {
+    "antd": "4.21.0",
+    "geostyler": "8.1.1",
+    "geostyler-geojson-parser": "1.0.1",
+    "geostyler-sld-parser": "3.2.2",
+    "geostyler-wfs-parser": "1.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.17.0"
+  }
+}

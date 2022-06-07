@@ -1,0 +1,4 @@
+<logging>
+  <level>PRODUCTION_LOGGING</level>
+  <stdOutLogging>true</stdOutLogging>
+</logging>
