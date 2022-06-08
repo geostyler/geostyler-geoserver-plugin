@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/geoserver/geoserver.git"
+    "url": "git+ssh://git@github.com/geostyler/geostyler-geoserver-plugin.git"
   },
   "keywords": [
     "GeoServer",
@@ -24,11 +24,11 @@
     "Style",
     "SLD"
   ],
-  "license": "GPL-3.0-or-later",
+  "license": "GPL-2.0-only",
   "bugs": {
-    "url": "https://github.com/geoserver/geoserver/issues"
+    "url": "https://github.com/geostyler/geostyler-geoserver-plugin/issues"
   },
-  "homepage": "https://github.com/geoserver/geoserver#readme",
+  "homepage": "https://github.com/geostyler/geostyler-geoserver-plugin",
   "browserslist": [
     ">1%",
     "last 4 versions",
