@@ -45,10 +45,24 @@
       <id>github</id>
       <name>GitHub geostyler/geostyler-geoserver-plugin Apache Maven Packages</name>
       <url>https://maven.pkg.github.com/geostyler/geostyler-geoserver-plugin</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <snapshotRepository>
+      <id>github</id>
+      <name>GitHub geostyler/geostyler-geoserver-plugin Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/geostyler/geostyler-geoserver-plugin</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
-    </repository>
+    </snapshotRepository>
   </distributionManagement>
 
   <properties>
