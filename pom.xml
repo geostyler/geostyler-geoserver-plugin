@@ -11,13 +11,13 @@
 
   <groupId>org.geoserver.community</groupId>
   <artifactId>gs-geostyler</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <name>GeoStyler community module</name>
 
   <scm>
     <connection>scm:git:git@github.com:geostyler/geostyler-geoserver-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:geostyler/geostyler-geoserver-plugin.git</developerConnection>
-    <tag>v1.0.0</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/geostyler/geostyler-geoserver-plugin</url>
   </scm>
 
