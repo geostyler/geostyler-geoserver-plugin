@@ -17,5 +17,5 @@ jobs:
         distribution: 'temurin'
         java-version: 17
 
-    - name: Build artifacts (maven) 🏗️
+    - name: Build artifacts 🏗️
       run: mvn clean package
