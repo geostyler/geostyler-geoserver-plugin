@@ -8,7 +8,7 @@ This extension integrates the GeoStyler UI into the GeoServer styles tab.
 
 To install the extension to your GeoServer just proceed as follows:
 
-1. Download the matching jar from [here](TODO).
+1. Download the matching jar from [here](https://github.com/geostyler/geostyler-geoserver-plugin/packages).
 2. Copy the jar into the `WEB-INF/lib` directory of your GeoServer installation.
 3. Restart GeoServer.
 
