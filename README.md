@@ -14,17 +14,27 @@ To install the extension to your GeoServer just proceed as follows:
 
 ## Development 🏗️
 
-### Update GeoStyler version
+Basically the plugin just includes the JavaScript resources of the GeoStyler into
+a Wicket page which in turn will be rendered by the GeoServer. The lib files aren't
+part of the repository and need to be packed into the plugin during build. To build
+the plugin (including the JS sources), just execute:
 
-- Update versions in `package.json` as desired
-- Run `npm i`
-- Run `npm run update`
+```
+mvn clean package
+```
 
-### Build maven artifact
+This will create a `gs-geostyler-<VERSION>.jar` file inside the `target` directory
+which can be copied to the GeoServer's lib directory. For testing purposes this
+repository contains a dockerized GeoServer:
 
-- `mvn clean package`
+1. Copy the freshly created jar into the lib directory:
 
-### Docker
+```
+cp ./target/gs-geostyler-<VERSION>.jar ./docker/geoserver/additional_libs
+```
 
-- `cp ./target/gs-geostyler-1.0.0.jar ./docker/geoserver/additional_libs`
-- `docker-compose up --build --force-recreate --remove-orphans`
+2. Run GeoServer:
+
+```
+docker-compose up --build --force-recreate --remove-orphans
+```
