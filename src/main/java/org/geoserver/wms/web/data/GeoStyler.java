@@ -117,34 +117,33 @@ public class GeoStyler extends Panel implements IHeaderContributor {
         header.render(
                 CssHeaderItem.forReference(
                         new PackageResourceReference(
-                                GeoStyler.class, "assets/geostyler-integration.css")));
+                                GeoStyler.class, "css/geostyler-integration.css")));
         header.render(
                 CssHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "assets/geostyler.css")));
+                        new PackageResourceReference(GeoStyler.class, "lib/geostyler.css")));
         header.render(
                 CssHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "assets/antd.min.css")));
+                        new PackageResourceReference(GeoStyler.class, "lib/antd.min.css")));
         header.render(
                 JavaScriptHeaderItem.forReference(
                         new PackageResourceReference(
-                                GeoStyler.class, "assets/react.production.min.js")));
+                                GeoStyler.class, "lib/react.production.min.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(
                         new PackageResourceReference(
-                                GeoStyler.class, "assets/react-dom.production.min.js")));
+                                GeoStyler.class, "lib/react-dom.production.min.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "assets/geostyler.js")));
+                        new PackageResourceReference(GeoStyler.class, "lib/geostyler.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(
-                                GeoStyler.class, "assets/geoJsonDataParser.js")));
+                        new PackageResourceReference(GeoStyler.class, "lib/geoJsonDataParser.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "assets/sldStyleParser.js")));
+                        new PackageResourceReference(GeoStyler.class, "lib/sldStyleParser.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "assets/wfsDataParser.js")));
+                        new PackageResourceReference(GeoStyler.class, "lib/wfsDataParser.js")));
         header.render(OnLoadHeaderItem.forScript(script.toString()));
     }
 

@@ -1,0 +1,21 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout sources 🔰
+      uses: actions/checkout@v3
+
+    - name: Set up Java 📐
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: 17
+
+    - name: Build artifacts (maven) 🏗️
+      run: mvn clean package

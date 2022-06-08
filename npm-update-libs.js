@@ -6,8 +6,19 @@ const utils = require('util');
 const exec = utils.promisify(cp.exec);
 
 (async () => {
+  const pckJsonPath = path.join('package.json');
+  const tmpDir = path.join('tmp');
+
   try {
-    const pck = await fs.readFile('./package.json', {
+    await exec(`rm -rf ${tmpDir}`);
+    await exec(`mkdir -p ${tmpDir}`);
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+
+  try {
+    const pck = await fs.readFile(pckJsonPath, {
       encoding: 'utf8'
     });
 
@@ -16,58 +27,58 @@ const exec = utils.promisify(cp.exec);
     for (let packageName in pckJson.dependencies) {
       const version = pckJson.dependencies[packageName].replace(/~|\^/g, '');
       const packageInstallation = `${packageName}@${version}`;
-      const targetPath = path.join('.', packageName);
-      const packCmd = `npm pack ${packageInstallation}`;
-      const tarCmd = `tar -xzvf ${packageInstallation.replace('@', '-')}.tgz --transform='s/package/${packageName}/g'`;
-      const rmCmd = `rm ${packageInstallation.replace('@', '-')}.tgz`;
+      const packCmd = `npm pack ${packageInstallation} --pack-destination ${tmpDir}`;
+      const tarCmd = `tar -xzvf ${path.join(tmpDir, packageInstallation.replace('@', '-'))}.tgz --transform='s/package/${packageName}/g' -C ${tmpDir}`;
 
       console.log('Packing library ' + packageInstallation);
 
-      await exec(`rm -rf ${targetPath}`);
       await exec(packCmd);
       await exec(tarCmd);
-      await exec(rmCmd);
     }
   } catch (error) {
     console.log(error);
+    return;
   }
 
   try {
-    const targetDir = 'src/main/java/org/geoserver/wms/web/data/assets';
+    const targetDir = path.join('src', 'main', 'java', 'org', 'geoserver', 'wms', 'web', 'data', 'lib');
     const packagesToUpdate = [
       {
-        from: 'antd/dist/antd.min.css',
+        from: path.join(tmpDir, 'antd', 'dist', 'antd.min.css'),
         to: targetDir
       },
       {
-        from: 'geostyler/browser/geostyler.css',
+        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.css'),
         to: targetDir
       },
       {
-        from: 'geostyler/browser/geostyler.js',
+        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.js'),
         to: targetDir
       },
       {
-        from: 'geostyler-geojson-parser/browser/geoJsonDataParser.js',
+        from: path.join(tmpDir, 'geostyler-geojson-parser', 'browser', 'geoJsonDataParser.js'),
         to: targetDir
       },
       {
-        from: 'geostyler-sld-parser/browser/sldStyleParser.js',
+        from: path.join(tmpDir, 'geostyler-sld-parser', 'browser', 'sldStyleParser.js'),
         to: targetDir
       },
       {
-        from: 'geostyler-wfs-parser/browser/wfsDataParser.js',
+        from: path.join(tmpDir, 'geostyler-wfs-parser', 'browser', 'wfsDataParser.js'),
         to: targetDir
       },
       {
-        from: 'react/umd/react.production.min.js',
+        from: path.join(tmpDir, 'react', 'umd', 'react.production.min.js'),
         to: targetDir
       },
       {
-        from: 'react-dom/umd/react-dom.production.min.js',
+        from: path.join(tmpDir, 'react-dom', 'umd', 'react-dom.production.min.js'),
         to: targetDir
       }
     ];
+
+    await exec(`rm -rf ${targetDir}`);
+    await exec(`mkdir -p ${targetDir}`);
 
     for (let package of packagesToUpdate) {
       console.log(`Copying from ${package.from} to ${package.to}`);
@@ -76,5 +87,6 @@ const exec = utils.promisify(cp.exec);
     }
   } catch (error) {
     console.error(error);
+    return;
   }
 })();

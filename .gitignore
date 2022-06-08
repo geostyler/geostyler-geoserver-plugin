@@ -1,16 +1,10 @@
 .spotless-index
 
-antd
-geostyler
-geostyler-geojson-parser
-geostyler-style
-geostyler-sld-parser
-geostyler-wfs-parser
-react
-react-dom
-
+tmp
+node
 node_modules
 target
+lib
 
 *.log
 *.log.*
