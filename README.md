@@ -38,3 +38,15 @@ cp ./target/gs-geostyler-<VERSION>.jar ./docker/geoserver/additional_libs
 ```
 docker-compose up --build --force-recreate --remove-orphans
 ```
+
+## Release 📰
+
+- Checkout the latest `main`.
+- Run the release script, e.g.
+
+```bash
+#./scripts/release.sh RELEASE_VERSION DEVELOPMENT_VERSION
+./scripts/release.sh "3.0.0" "3.0.1-SNAPSHOT"
+```
+
+- Go to `Releases` page in GitHub and publish the newly created release.
