@@ -23,5 +23,5 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-    - name: Build artifacts (maven) 🏗️
+    - name: Build artifacts 🏗️
       run: mvn clean package

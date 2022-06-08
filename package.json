@@ -11,7 +11,7 @@
     "Johannes Weskamm <weskamm@terrestris.de>"
   ],
   "scripts": {
-    "lint": "eslint -c .eslintrc --ext ftl ../../../../../../../resources/org/geoserver/wms/web/data/",
+    "lint": "eslint -c .eslintrc --ext ftl ./src/main/resources/org/geoserver/wms/web/data/",
     "build": "node ./npm-update-libs.js"
   },
   "repository": {
