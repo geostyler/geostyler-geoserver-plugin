@@ -12,3 +12,6 @@ lib
 *iml
 .idea
 .vscode
+
+release.properties
+*.releaseBackup
