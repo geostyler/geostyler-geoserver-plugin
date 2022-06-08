@@ -12,7 +12,7 @@
   <groupId>org.geoserver.community</groupId>
   <artifactId>gs-geostyler</artifactId>
   <name>GeoStyler community module</name>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <repositories>
     <repository>
@@ -39,6 +39,17 @@
       <url>https://repo.osgeo.org/repository/snapshot/</url>
     </repository>
   </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub geostyler/geostyler-geoserver-plugin Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/geostyler/geostyler-geoserver-plugin</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </distributionManagement>
 
   <properties>
     <geoserver.version>2.21.0</geoserver.version>

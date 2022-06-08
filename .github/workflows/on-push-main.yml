@@ -19,3 +19,8 @@ jobs:
 
     - name: Build artifacts 🏗️
       run: mvn clean package
+
+    - name: Publish artifact 📰
+      run: mvn deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
