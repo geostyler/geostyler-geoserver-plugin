@@ -41,7 +41,7 @@ const exec = utils.promisify(cp.exec);
   }
 
   try {
-    const targetDir = path.join('src', 'main', 'java', 'org', 'geoserver', 'wms', 'web', 'data', 'lib');
+    const targetDir = path.join('src', 'main', 'resources', 'org', 'geoserver', 'wms', 'web', 'data', 'lib');
     const packagesToUpdate = [
       {
         from: path.join(tmpDir, 'antd', 'dist', 'antd.min.css'),
