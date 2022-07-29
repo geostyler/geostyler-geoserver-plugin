@@ -36,7 +36,7 @@
     "not ie < 9"
   ],
   "dependencies": {
-    "antd": "4.21.3",
+    "antd": "4.22.2",
     "geostyler": "8.1.1",
     "geostyler-geojson-parser": "1.0.1",
     "geostyler-sld-parser": "3.2.2",
