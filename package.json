@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "antd": "4.21.3",
-    "geostyler": "8.1.1",
+    "geostyler": "10.1.0",
     "geostyler-geojson-parser": "1.0.1",
     "geostyler-sld-parser": "3.2.2",
     "geostyler-wfs-parser": "1.0.1",
