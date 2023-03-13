@@ -25,6 +25,8 @@ import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnLoadHeaderItem;
 import org.apache.wicket.markup.html.IHeaderContributor;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.http.WebRequest;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.resource.NoOpTextCompressor;
 import org.geoserver.catalog.LayerInfo;
@@ -106,6 +108,8 @@ public class GeoStyler extends Panel implements IHeaderContributor {
             context.put("layerType", StringUtils.EMPTY);
         }
 
+        context.put("basePath", getContextPath() + "/ows");
+
         Template template = templates.getTemplate("geostyler-init.ftl");
         StringWriter script = new java.io.StringWriter();
         template.process(context, script);
@@ -158,5 +162,14 @@ public class GeoStyler extends Panel implements IHeaderContributor {
                 .getResourceSettings()
                 .setJavaScriptCompressor(new DefaultJavaScriptCompressor());
         super.onRemove();
+    }
+
+    private String getContextPath() {
+        final Request request = getRequest();
+        if (request instanceof WebRequest) {
+            final WebRequest wr = (WebRequest) request;
+            return wr.getContextPath();
+        }
+        return null;
     }
 }

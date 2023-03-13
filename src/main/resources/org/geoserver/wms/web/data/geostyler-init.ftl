@@ -2,6 +2,7 @@
   // get infos from GeoServer
   var layerNames = '${layer}';
   var layerType = '${layerType}';
+  var basePath = '${basePath}';
 
   // append some divs to the DOM right above the code editor
   var root = document.createElement('div');
@@ -70,7 +71,7 @@
   if (layerType.toLowerCase() === 'vector') {
     var wfsParser = new GeoStylerWfsParser.WfsDataParser();
     getFeaturePromise = wfsParser.readData({
-      url: window.location.origin + '/geoserver/ows',
+      url: window.location.origin + basePath,
       version: '2.0.0',
       typeName: layerNames,
       srsName: 'EPSG:4326',
