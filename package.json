@@ -40,7 +40,7 @@
     "geostyler": "8.1.1",
     "geostyler-geojson-parser": "1.0.1",
     "geostyler-sld-parser": "3.2.2",
-    "geostyler-wfs-parser": "1.0.1",
+    "geostyler-wfs-parser": "2.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
