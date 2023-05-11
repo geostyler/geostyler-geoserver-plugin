@@ -23,26 +23,14 @@
 
   <distributionManagement>
     <repository>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>github</id>
-      <name>GitHub geostyler/geostyler-geoserver-plugin Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/geostyler/geostyler-geoserver-plugin</url>
+      <id>nexus.terrestris.de-releases</id>
+      <name>Nexus Release Repository</name>
+      <url>https://nexus.terrestris.de/repository/geoserver-extras/</url>
     </repository>
     <snapshotRepository>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <id>github</id>
-      <name>GitHub geostyler/geostyler-geoserver-plugin Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/geostyler/geostyler-geoserver-plugin</url>
+      <id>nexus.terrestris.de-snapshots</id>
+      <name>SHOGun Snapshot Repository</name>
+      <url>https://nexus.terrestris.de/repository/geoserver-extras/</url>
     </snapshotRepository>
   </distributionManagement>
 
@@ -117,6 +105,13 @@
 
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <classifier>${geoserver.version}</classifier>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>

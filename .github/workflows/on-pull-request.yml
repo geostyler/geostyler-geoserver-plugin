@@ -3,6 +3,16 @@ name: Test successful build
 on: pull_request
 
 jobs:
+  commitlint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout sources 🔰
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v5
+        name: Check commits 🔥
+
   build:
     runs-on: ubuntu-latest
     steps:
