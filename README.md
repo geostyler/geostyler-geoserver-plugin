@@ -4,15 +4,29 @@ This extension integrates the GeoStyler UI into the GeoServer styles tab.
 
 ![Preview](./preview.png)
 
+
 ## Installation 🥳
 
 To install the extension to your GeoServer just proceed as follows:
 
-1. Download the matching jar from [here](https://nexus.terrestris.de/#browse/browse:geoserver-extras:org%2Fgeoserver%2Fcommunity%2Fgs-geostyler).
-2. Copy the jar into the `WEB-INF/lib` directory of your GeoServer installation.
-3. Restart GeoServer.
+1. Download the **matching jar** from [this Nexus repository](https://nexus.terrestris.de/#browse/browse:geoserver-extras:org%2Fgeoserver%2Fcommunity%2Fgs-geostyler).
+2. Copy the jar into the `WEB-INF/lib` directory of your GeoServer installation. 
+3. Restart GeoServer
 
-The GeoServer version is the second version in the jar filename, the first is the plugin version.
+<details>
+  <summary>How to find the <strong>matching jar</strong>? <small>[click to show/hide]</small></summary><p>
+  <ul>
+  <li>The link will lead you to the list of all published artefacts of the plugin, organized in a directory
+structure</li>
+  <li>below <code>org/geoserver/community/gs-geostyler</code> you will find packages for several versions of GeoStyler, e.g. <code>1.2.0</code>, <code>1.2.1</code> or <code>1.2.2</code>
+  <li>Choose the highest version, e.g. <code>1.2.2</code>, and click on the version. A subfolder will be shown</li>
+  <li>You will need to download a version that is compatible to your GeoServer version, e.g. <code>2.22.2</code></li>
+  <li>The jars are named according to the following scheme: <code>gs-geostyler-[[GeoStyler-version]]-[[GeoServer-version]].jar</code></li>
+  <li>So for the example versions above, the matching jar would be <code>gs-geostyler-1.2.2-2.22.2.jar</code>, since
+  the needed <code>[[GeoStyler-version]]</code> is <code>1.2.2</code> and the target <code>[[GeoServer-version]]</code> is <code>2.22.2</code>
+  <img src="./download-example.gif" alt="Example workflow to find the matching jar"/>
+  </p>
+</details>
 
 ## Development 🏗️
 
