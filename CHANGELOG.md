@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.2.1...v1.2.2) (2023-05-11)
+
+
+### Bug Fixes
+
+* prevent creation of SNAPSHOT version ([ae7df06](https://github.com/geostyler/geostyler-geoserver-plugin/commit/ae7df06d55a359c9cbf12be16257ee106cce9eb7))
+
 ## [1.2.1](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.2.0...v1.2.1) (2023-05-11)
 
 
