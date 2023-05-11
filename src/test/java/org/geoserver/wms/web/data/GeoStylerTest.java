@@ -1,14 +1,13 @@
 package org.geoserver.wms.web.data;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import org.apache.commons.io.IOUtils;
 import org.apache.wicket.util.file.File;
 import org.apache.wicket.util.tester.FormTester;
 import org.geoserver.web.GeoServerWicketTestSupport;
 import org.junit.Test;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class GeoStylerTest extends GeoServerWicketTestSupport {
 
@@ -24,8 +23,7 @@ public class GeoStylerTest extends GeoServerWicketTestSupport {
                         new java.io.File(
                                 getClass()
                                         .getClassLoader()
-                                        .getResource(
-                                                "default_point.sld")
+                                        .getResource("default_point.sld")
                                         .toURI()));
         String sld =
                 IOUtils.toString(new FileReader(styleFile))
