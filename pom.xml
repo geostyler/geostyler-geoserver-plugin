@@ -36,7 +36,7 @@
 
   <properties>
     <geoserver.version>2.22.2</geoserver.version>
-    <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
+    <frontend-maven-plugin.version>1.13.4</frontend-maven-plugin.version>
   </properties>
 
   <dependencies>
