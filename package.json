@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@terrestris/maven-semantic-release": "^2.1.3",
-    "eslint": "^8.35.0",
+    "eslint": "^8.45.0",
     "semantic-release": "^21.0.2"
   },
   "funding": "https://opencollective.com/geostyler"
