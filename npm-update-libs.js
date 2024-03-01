@@ -48,11 +48,11 @@ const exec = utils.promisify(cp.exec);
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.css'),
+        from: path.join(tmpDir, 'geostyler', 'browser', 'style.css'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.js'),
+        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.js.iife.js'),
         to: targetDir
       },
       {
