@@ -23,7 +23,6 @@ import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.head.OnLoadHeaderItem;
-import org.apache.wicket.markup.html.IHeaderContributor;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.http.WebRequest;
@@ -35,7 +34,7 @@ import org.geoserver.template.TemplateUtils;
 import org.geoserver.web.GeoServerApplication;
 import org.geotools.util.logging.Logging;
 
-public class GeoStyler extends Panel implements IHeaderContributor {
+public class GeoStyler extends Panel {
 
     private static final Logger LOGGER = Logging.getLogger(GeoStyler.class);
 
@@ -124,10 +123,10 @@ public class GeoStyler extends Panel implements IHeaderContributor {
                                 GeoStyler.class, "css/geostyler-integration.css")));
         header.render(
                 CssHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/geostyler.css")));
+                        new PackageResourceReference(GeoStyler.class, "lib/style.css")));
         header.render(
                 CssHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/antd.min.css")));
+                        new PackageResourceReference(GeoStyler.class, "lib/reset.css")));
         header.render(
                 JavaScriptHeaderItem.forReference(
                         new PackageResourceReference(
@@ -138,13 +137,23 @@ public class GeoStyler extends Panel implements IHeaderContributor {
                                 GeoStyler.class, "lib/react-dom.production.min.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/geostyler.js")));
+                        new PackageResourceReference(GeoStyler.class, "lib/dayjs.min.js")));
+        header.render(
+                JavaScriptHeaderItem.forReference(
+                        new PackageResourceReference(GeoStyler.class, "lib/antd.min.js")));
+        header.render(
+                JavaScriptHeaderItem.forReference(
+                        new PackageResourceReference(GeoStyler.class, "lib/ol.js")));
+        header.render(
+                JavaScriptHeaderItem.forReference(
+                        new PackageResourceReference(GeoStyler.class, "lib/geostyler.js.iife.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(
                         new PackageResourceReference(GeoStyler.class, "lib/geoJsonDataParser.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/sldStyleParser.js")));
+                        new PackageResourceReference(
+                                GeoStyler.class, "lib/sldStyleParser.iife.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(
                         new PackageResourceReference(GeoStyler.class, "lib/wfsDataParser.js")));
