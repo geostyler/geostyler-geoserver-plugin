@@ -38,11 +38,11 @@
   "dependencies": {
     "antd": "5.17.4",
     "dayjs": "1.11.11",
-    "geostyler": "14.1.2",
+    "geostyler": "14.1.4",
     "geostyler-geojson-parser": "1.0.1",
     "geostyler-sld-parser": "5.3.1",
     "geostyler-wfs-parser": "2.0.0",
-    "ol": "^9.2.3",
+    "ol": "9.2.3",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
