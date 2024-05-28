@@ -44,15 +44,35 @@ const exec = utils.promisify(cp.exec);
     const targetDir = path.join('src', 'main', 'resources', 'org', 'geoserver', 'wms', 'web', 'data', 'lib');
     const packagesToUpdate = [
       {
-        from: path.join(tmpDir, 'antd', 'dist', 'antd.min.css'),
+        from: path.join(tmpDir, 'react', 'umd', 'react.production.min.js'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.css'),
+        from: path.join(tmpDir, 'react-dom', 'umd', 'react-dom.production.min.js'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.js'),
+        from: path.join(tmpDir, 'dayjs', 'dayjs.min.js'),
+        to: targetDir
+      },
+      {
+        from: path.join(tmpDir, 'antd', 'dist', 'antd.min.js'),
+        to: targetDir
+      },
+      {
+        from: path.join(tmpDir, 'antd', 'dist', 'reset.css'),
+        to: targetDir
+      },
+      {
+        from: path.join(tmpDir, 'ol', 'dist', 'ol.js'),
+        to: targetDir
+      },
+      {
+        from: path.join(tmpDir, 'geostyler', 'browser', 'style.css'),
+        to: targetDir
+      },
+      {
+        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.js.iife.js'),
         to: targetDir
       },
       {
@@ -60,19 +80,11 @@ const exec = utils.promisify(cp.exec);
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler-sld-parser', 'browser', 'sldStyleParser.js'),
+        from: path.join(tmpDir, 'geostyler-sld-parser', 'browser', 'sldStyleParser.iife.js'),
         to: targetDir
       },
       {
         from: path.join(tmpDir, 'geostyler-wfs-parser', 'browser', 'wfsDataParser.js'),
-        to: targetDir
-      },
-      {
-        from: path.join(tmpDir, 'react', 'umd', 'react.production.min.js'),
-        to: targetDir
-      },
-      {
-        from: path.join(tmpDir, 'react-dom', 'umd', 'react-dom.production.min.js'),
         to: targetDir
       }
     ];
