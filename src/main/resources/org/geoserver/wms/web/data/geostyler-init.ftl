@@ -135,7 +135,7 @@
       },
       requestParams: {
         version: '2.0.0',
-        typeName: layerNames,
+        typeNames: layerNames,
         srsName: 'EPSG:4326',
         count: 1
       },
