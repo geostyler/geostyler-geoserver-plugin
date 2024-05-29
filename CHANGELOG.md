@@ -1,3 +1,13 @@
+# [1.3.0](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.2.2...v1.3.0) (2024-05-29)
+
+
+### Features
+
+* adapt java and ftl code to version updates ([c68934c](https://github.com/geostyler/geostyler-geoserver-plugin/commit/c68934cccf2334278d297fb430b0277f9155be0c))
+* update to GeoServer 2.25.1 ([186f7f3](https://github.com/geostyler/geostyler-geoserver-plugin/commit/186f7f379a87fc989996aa59f4cd24bdecc74f31))
+* update to latest GeoStyler ([f484086](https://github.com/geostyler/geostyler-geoserver-plugin/commit/f4840868c0ef8d8341920f730bb3267bacabb431))
+* use official geoserver docker image ([6e86146](https://github.com/geostyler/geostyler-geoserver-plugin/commit/6e861462a4f56afe82be660a7ba50c15c6063a28))
+
 ## [1.2.2](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.2.1...v1.2.2) (2023-05-11)
 
 
