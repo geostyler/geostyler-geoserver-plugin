@@ -30,33 +30,91 @@
   root.appendChild(checkboxWrapper);
   root.appendChild(geoStylerDiv);
 
+  var reactRoot = ReactDOM.createRoot(geoStylerDiv);
+
   var codeEditor = document.getElementById('style-editor');
   var codeMirror = document.gsEditors.editor;
   document.querySelector('#styleForm').insertBefore(root, codeEditor);
 
   // handle GeoStyler changes and update the SLD in editor
-  var styleParser = new GeoStylerSLDParser.SldStyleParser();
-  var geostylerProps;
+  var styleParser = new GeoStylerSLDParser.SldStyleParser({
+    builderOptions: {
+      format: true
+    }
+  });
+
+  var dontTriggerGeoStylerStyleupdate = false;
+
   var onChange = function(styleObj) {
-    styleParser.writeStyle(styleObj).then(function(sld) {
-      codeMirror.setValue(sld.output);
-      if (liveUpdateCheckbox.checked) {
-        // apply settings immediately
-        document.querySelector('.form-button-apply').click();
+    styleParser.writeStyle(styleObj)
+      .then(function(sld) {
+        dontTriggerGeoStylerStyleupdate = true;
+        codeMirror.setValue(sld.output);
+        if (liveUpdateCheckbox.checked) {
+          // apply settings immediately
+          document.querySelector('.form-button-apply').click();
+        }
+      });
+  };
+
+  var geoStylerProps = {
+    onStyleChange: onChange,
+    disableClassification: true
+  };
+  var geoStylerContextValues = {
+    composition: {
+      Rule: {
+        amountField: {
+          visibility: false
+        },
+        duplicateField: {
+          visibility: false
+        }
+      },
+      RuelCard: {
+        amountField: {
+          visibility: false
+        },
+        duplicateField: {
+          visibility: false
+        }
       }
-    });
+    }
+  };
+
+  /**
+   *
+   * @param props {Object} The props to re-render the GeoStyler component
+   */
+  var reRenderGeoStyler = function(props, contextValues) {
+    var fullScreen = document.getElementById('page').classList.contains('fullscreen');
+    geoStylerProps = props;
+    geoStylerContextValues = contextValues;
+    var geostylerStyle = React.createElement(
+      fullScreen ? GeoStyler.CardStyle : GeoStyler.Style,
+      geoStylerProps
+    );
+    var geostylerContext = React.createElement(
+      GeoStyler.GeoStylerContext.Provider,
+      { value: geoStylerContextValues || {} },
+      geostylerStyle
+    );
+    GeoStyler.locale.de_DE.RuleFieldContainer.nameFieldLabel = 'GeoStyler';
+    reactRoot.render(geostylerContext);
   };
 
   // handle code editor changes and apply to GeoStyler
   codeMirror.on('change', function() {
+    // avoid change resting the UI
+    if (dontTriggerGeoStylerStyleupdate) {
+      dontTriggerGeoStylerStyleupdate = false;
+      return;
+    }
     styleParser.readStyle(codeMirror.getValue())
       .then(function(style) {
-        var props = $.extend({}, geostylerProps);
+        var props = Object.assign({}, geoStylerProps);
         props.style = style.output;
-        var geostylerStyle = React.createElement(GeoStyler.Style, props);
-
-        GeoStyler.locale.de_DE.GsRule.nameFieldLabel = 'GeoStyler';
-        window._GeoStyler = ReactDOM.render(geostylerStyle, geoStylerDiv);
+        reRenderGeoStyler(props, geoStylerContextValues);
       });
   });
 
@@ -72,30 +130,35 @@
     var wfsParser = new GeoStylerWfsParser.WfsDataParser();
     getFeaturePromise = wfsParser.readData({
       url: window.location.origin + basePath,
-      version: '2.0.0',
-      typeName: layerNames,
-      srsName: 'EPSG:4326',
       fetchParams: {
         credentials: 'same-origin'
       },
-      maxFeatures: 1
+      requestParams: {
+        version: '2.0.0',
+        typeName: layerNames,
+        srsName: 'EPSG:4326',
+        count: 1
+      },
     });
   }
 
   // finally build the GeoStyler with the parsed style and feature, if available
   Promise.all([stylePromise, getFeaturePromise])
     .then(function(response) {
-      var geostylerStyle = React.createElement(
-        GeoStyler.Style, geostylerProps = {
-          style: response[0].output,
-          data: response[1],
-          compact: true,
-          enableClassification: true,
-          onStyleChange: onChange,
-          showAmountColumn: false,
-          showDuplicatesColumn: false
-        });
-      GeoStyler.locale.de_DE.GsRule.nameFieldLabel = 'GeoStyler';
-      window._GeoStyler = ReactDOM.render(geostylerStyle, geoStylerDiv);
+      geoStylerProps.style = response[0].output;
+      geoStylerContextValues.data = response[1];
+      reRenderGeoStyler(geoStylerProps, geoStylerContextValues);
     });
+
+  // Change geostyler layout on full screen toggle
+  var observer = new MutationObserver(function () {
+    reRenderGeoStyler(geoStylerProps, geoStylerContextValues);
+  });
+  observer.observe(document.getElementById('page'), {
+    attributes: true,
+    attributeFilter: ['class'],
+    childList: false,
+    characterData: false
+  });
+
 })();

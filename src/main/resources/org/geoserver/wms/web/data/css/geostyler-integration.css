@@ -34,6 +34,10 @@
     text-align: center;
 }
 
+#geoStylerDiv .gs-card-style {
+    padding: 1em;
+}
+
 .gs-style-name-classification-row label {
     padding-top: 7px;
 }

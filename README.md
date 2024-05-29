@@ -10,7 +10,7 @@ This extension integrates the GeoStyler UI into the GeoServer styles tab.
 To install the extension to your GeoServer just proceed as follows:
 
 1. Download the **matching jar** from [this Nexus repository](https://nexus.terrestris.de/#browse/browse:geoserver-extras:org%2Fgeoserver%2Fcommunity%2Fgs-geostyler).
-2. Copy the jar into the `WEB-INF/lib` directory of your GeoServer installation. 
+2. Copy the jar into the `WEB-INF/lib` directory of your GeoServer installation.
 3. Restart GeoServer
 
 <details>
@@ -52,7 +52,8 @@ cp ./target/gs-geostyler-<VERSION>.jar ./docker/geoserver/additional_libs
 2. Run GeoServer:
 
 ```
-docker-compose up --build --force-recreate --remove-orphans
+cd docker
+docker compose up --build --force-recreate --remove-orphans
 ```
 
 ## Release 📰
@@ -65,4 +66,3 @@ Maintenance and further development of this code can be funded through the
 [GeoStyler Open Collective](https://opencollective.com/geostyler). All contributions and
 expenses can transparently be reviewed by anyone; you see what we use the donated money for.
 Thank you for any financial support you give the GeoStyler project 💞
-

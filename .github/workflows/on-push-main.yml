@@ -19,7 +19,7 @@ jobs:
         java-version: 17
 
     - name: Build artifacts 🏗️
-      run: mvn clean package
+      run: mvn clean package -B
 
     - name: Create maven settings.xml with credentials
       uses: whelk-io/maven-settings-xml-action@v2
