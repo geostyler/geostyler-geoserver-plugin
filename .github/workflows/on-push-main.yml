@@ -22,7 +22,7 @@ jobs:
       run: mvn clean package -B
 
     - name: Create maven settings.xml with credentials
-      uses: whelk-io/maven-settings-xml-action@v2
+      uses: whelk-io/maven-settings-xml-action@v22
       with:
         servers: |
           [
