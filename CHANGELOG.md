@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.3.2...v1.3.3) (2024-06-12)
+
+
+### Bug Fixes
+
+* **deps:** update geostyler-wfs-parser to v2.0.2 ([2abec69](https://github.com/geostyler/geostyler-geoserver-plugin/commit/2abec69b3318a7e64b1a658dc482d1a2100fa615))
+
 ## [1.3.2](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.3.1...v1.3.2) (2024-06-04)
 
 
