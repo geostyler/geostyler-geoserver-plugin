@@ -71,7 +71,7 @@
           visibility: false
         }
       },
-      RuelCard: {
+      RuleCard: {
         amountField: {
           visibility: false
         },

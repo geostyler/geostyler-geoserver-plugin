@@ -96,6 +96,16 @@ public class GeoStyler extends Panel {
      * @throws TemplateException
      */
     private void renderHeaderScript(IHeaderResponse header) throws IOException, TemplateException {
+        String styleFormat = parent.getStyleInfo().getFormat();
+
+        if (!styleFormat.equals("sld")) {
+            LOGGER.info(
+                    "Don't render GeoStyler for format "
+                            + styleFormat
+                            + " as it is not supported.");
+            return;
+        }
+
         Map<String, Object> context = new HashMap<>();
         LayerInfo layerInfo = parent.getLayerInfo();
         ResourceInfo resource = layerInfo.getResource();
