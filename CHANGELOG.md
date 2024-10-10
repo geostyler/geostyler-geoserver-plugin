@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.4.0...v1.5.0) (2024-10-10)
+
+
+### Bug Fixes
+
+* inherit geoserver version from parent pom ([ef59b39](https://github.com/geostyler/geostyler-geoserver-plugin/commit/ef59b39c5cf796146b5ef8bcc9c884f0aef25600))
+
+
+### Features
+
+* update GeoServer to v2.26.0 ([12953a4](https://github.com/geostyler/geostyler-geoserver-plugin/commit/12953a4d0d4516d131a68fd6550f1fbf135185e3))
+
 # [1.4.0](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.3.3...v1.4.0) (2024-10-10)
 
 
