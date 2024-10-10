@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.3.3...v1.4.0) (2024-10-10)
+
+
+### Features
+
+* only show GeoStyler for SLD Styles ([f4f8715](https://github.com/geostyler/geostyler-geoserver-plugin/commit/f4f871544d92175a84fc6a4413c1920e519be9cf))
+
 ## [1.3.3](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.3.2...v1.3.3) (2024-06-12)
 
 
