@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.0...v1.5.1) (2025-02-24)
+
+
+### Bug Fixes
+
+* fix link in README ([448042b](https://github.com/geostyler/geostyler-geoserver-plugin/commit/448042baa42b5805829e853dcdaabf244aae07e0))
+
 # [1.5.0](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.4.0...v1.5.0) (2024-10-10)
 
 
