@@ -58,7 +58,7 @@ docker compose up --build --force-recreate --remove-orphans
 
 ## Release 📰
 
-Uses the @terrestris/maven-semantic-release plugin to create new releases automatically.
+Uses the [@terrestris/maven-semantic-release](https://github.com/terrestris/maven-semantic-release) plugin to create new releases automatically.
 
 ## <a name="funding"></a>Funding & financial sponsorship
 
