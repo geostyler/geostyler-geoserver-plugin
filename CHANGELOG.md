@@ -1,3 +1,10 @@
+## [1.5.5](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.4...v1.5.5) (2025-10-29)
+
+
+### Bug Fixes
+
+* make use of correct variable ([3dda566](https://github.com/geostyler/geostyler-geoserver-plugin/commit/3dda56646a974669253bdab83315e731875368b1))
+
 ## [1.5.4](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.3...v1.5.4) (2025-10-29)
 
 
