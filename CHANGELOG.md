@@ -1,3 +1,12 @@
+## [1.5.4](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.3...v1.5.4) (2025-10-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency antd to v5.27.6 ([46a6cf3](https://github.com/geostyler/geostyler-geoserver-plugin/commit/46a6cf3a1a083c2ee04824da53ee7e243e3fbc7f))
+* **deps:** update dependency geostyler-geojson-parser to v2 ([a54698c](https://github.com/geostyler/geostyler-geoserver-plugin/commit/a54698ca68913384aacffb0b553327b7a1d27650))
+* **deps:** update dependency geostyler-wfs-parser to v3 ([d016c30](https://github.com/geostyler/geostyler-geoserver-plugin/commit/d016c30c7710704acc376cc61f768fe825511877))
+
 ## [1.5.3](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.2...v1.5.3) (2025-10-29)
 
 

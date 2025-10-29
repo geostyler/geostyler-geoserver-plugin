@@ -11,7 +11,7 @@
 
   <groupId>org.geoserver.community</groupId>
   <artifactId>gs-geostyler</artifactId>
-  <version>1.5.3</version>
+  <version>1.5.4</version>
   <name>GeoStyler community module</name>
 
   <scm>
