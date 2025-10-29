@@ -68,23 +68,23 @@ const exec = utils.promisify(cp.exec);
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler', 'browser', 'style.css'),
+        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.css'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.js.iife.js'),
+        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.iife.js'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler-geojson-parser', 'browser', 'geoJsonDataParser.js'),
+        from: path.join(tmpDir, 'geostyler-geojson-parser', 'dist', 'geoJsonDataParser.iife.js'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler-sld-parser', 'browser', 'sldStyleParser.iife.js'),
+        from: path.join(tmpDir, 'geostyler-sld-parser', 'dist', 'sldStyleParser.iife.js'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler-wfs-parser', 'browser', 'wfsDataParser.js'),
+        from: path.join(tmpDir, 'geostyler-wfs-parser', 'dist', 'wfsDataParser.iife.js'),
         to: targetDir
       }
     ];

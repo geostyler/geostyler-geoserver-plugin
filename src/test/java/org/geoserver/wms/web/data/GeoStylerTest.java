@@ -18,17 +18,11 @@ public class GeoStylerTest extends GeoServerWicketTestSupport {
 
         FormTester form = tester.newFormTester("styleForm");
 
-        File styleFile =
-                new File(
-                        new java.io.File(
-                                getClass()
-                                        .getClassLoader()
-                                        .getResource("default_point.sld")
-                                        .toURI()));
-        String sld =
-                IOUtils.toString(new FileReader(styleFile))
-                        .replaceAll("\r\n", "\n")
-                        .replaceAll("\r", "\n");
+        File styleFile = new File(new java.io.File(
+                getClass().getClassLoader().getResource("default_point.sld").toURI()));
+        String sld = IOUtils.toString(new FileReader(styleFile))
+                .replaceAll("\r\n", "\n")
+                .replaceAll("\r", "\n");
         form.setValue("context:panel:name", "default_point_style");
         form.setValue("styleEditor:editorContainer:editorParent:editor", sld);
         form.submit();

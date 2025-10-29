@@ -99,10 +99,7 @@ public class GeoStyler extends Panel {
         String styleFormat = parent.getStyleInfo().getFormat();
 
         if (!styleFormat.equals("sld")) {
-            LOGGER.info(
-                    "Don't render GeoStyler for format "
-                            + styleFormat
-                            + " as it is not supported.");
+            LOGGER.info("Don't render GeoStyler for format " + styleFormat + " as it is not supported.");
             return;
         }
 
@@ -123,63 +120,36 @@ public class GeoStyler extends Panel {
         StringWriter script = new java.io.StringWriter();
         template.process(context, script);
 
-        // temporarily disable javascript compression since build resources are already compressed
-        GeoServerApplication.get()
-                .getResourceSettings()
-                .setJavaScriptCompressor(new NoOpTextCompressor());
+        // temporarily disable javascript compression since build resources are already
+        // compressed
+        GeoServerApplication.get().getResourceSettings().setJavaScriptCompressor(new NoOpTextCompressor());
+        header.render(CssHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/geostyler.css")));
+        header.render(CssHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/reset.css")));
+        header.render(JavaScriptHeaderItem.forReference(
+                new PackageResourceReference(GeoStyler.class, "lib/react.production.min.js")));
+        header.render(JavaScriptHeaderItem.forReference(
+                new PackageResourceReference(GeoStyler.class, "lib/react-dom.production.min.js")));
         header.render(
-                CssHeaderItem.forReference(
-                        new PackageResourceReference(
-                                GeoStyler.class, "css/geostyler-integration.css")));
+                JavaScriptHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/dayjs.min.js")));
         header.render(
-                CssHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/style.css")));
-        header.render(
-                CssHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/reset.css")));
-        header.render(
-                JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(
-                                GeoStyler.class, "lib/react.production.min.js")));
-        header.render(
-                JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(
-                                GeoStyler.class, "lib/react-dom.production.min.js")));
-        header.render(
-                JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/dayjs.min.js")));
-        header.render(
-                JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/antd.min.js")));
-        header.render(
-                JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/ol.js")));
-        header.render(
-                JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/geostyler.js.iife.js")));
-        header.render(
-                JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/geoJsonDataParser.js")));
-        header.render(
-                JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(
-                                GeoStyler.class, "lib/sldStyleParser.iife.js")));
-        header.render(
-                JavaScriptHeaderItem.forReference(
-                        new PackageResourceReference(GeoStyler.class, "lib/wfsDataParser.js")));
+                JavaScriptHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/antd.min.js")));
+        header.render(JavaScriptHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/ol.js")));
+        header.render(JavaScriptHeaderItem.forReference(
+                new PackageResourceReference(GeoStyler.class, "lib/geostyler.iife.js")));
+        header.render(JavaScriptHeaderItem.forReference(
+                new PackageResourceReference(GeoStyler.class, "lib/geoJsonDataParser.iife.js")));
+        header.render(JavaScriptHeaderItem.forReference(
+                new PackageResourceReference(GeoStyler.class, "lib/sldStyleParser.iife.js")));
+        header.render(JavaScriptHeaderItem.forReference(
+                new PackageResourceReference(GeoStyler.class, "lib/wfsDataParser.iife.js")));
         header.render(OnLoadHeaderItem.forScript(script.toString()));
     }
 
-    /**
-     * As soon as the {@link GeoStyler} is removed the default Javascript compression needs to be
-     * enabled
-     */
+    /** As soon as the {@link GeoStyler} is removed the default Javascript compression needs to be enabled */
     @Override
     protected void onRemove() {
         // (re-) enable javascript compression
-        GeoServerApplication.get()
-                .getResourceSettings()
-                .setJavaScriptCompressor(new DefaultJavaScriptCompressor());
+        GeoServerApplication.get().getResourceSettings().setJavaScriptCompressor(new DefaultJavaScriptCompressor());
         super.onRemove();
     }
 
