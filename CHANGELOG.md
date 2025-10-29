@@ -1,3 +1,10 @@
+## [1.5.6](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.5...v1.5.6) (2025-10-29)
+
+
+### Bug Fixes
+
+* don't use classifier to set name ([e68e196](https://github.com/geostyler/geostyler-geoserver-plugin/commit/e68e196a02efcf65a565445a9dd28cc163369e98))
+
 ## [1.5.5](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.4...v1.5.5) (2025-10-29)
 
 
