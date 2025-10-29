@@ -41,7 +41,7 @@
     "geostyler": "18.1.2",
     "geostyler-geojson-parser": "1.0.1",
     "geostyler-sld-parser": "8.1.0",
-    "geostyler-wfs-parser": "2.0.2",
+    "geostyler-wfs-parser": "3.0.1",
     "ol": "10.6.1",
     "react": "18.3.1",
     "react-dom": "18.3.1"
