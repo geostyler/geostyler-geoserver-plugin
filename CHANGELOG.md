@@ -1,3 +1,13 @@
+## [1.5.3](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.2...v1.5.3) (2025-10-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency geostyler to v18 ([ecbc772](https://github.com/geostyler/geostyler-geoserver-plugin/commit/ecbc772be31fd7cbf60f3d8200e40f273097b563))
+* **deps:** update dependency geostyler-sld-parser to v8 ([6bd117e](https://github.com/geostyler/geostyler-geoserver-plugin/commit/6bd117ed1a6afa455290e18acf60bf8026e61dec))
+* **deps:** update dependency ol to v10 ([d47847d](https://github.com/geostyler/geostyler-geoserver-plugin/commit/d47847d0bcb68441a76768fcb273287d2af35620))
+* **deps:** update dependency org.geoserver:geoserver to v2.28.0 ([380fba3](https://github.com/geostyler/geostyler-geoserver-plugin/commit/380fba3a74578b9f7a388dca430b137d638e2cf4))
+
 ## [1.5.2](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.1...v1.5.2) (2025-10-29)
 
 
