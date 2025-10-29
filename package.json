@@ -43,8 +43,8 @@
     "geostyler-sld-parser": "5.3.1",
     "geostyler-wfs-parser": "2.0.2",
     "ol": "10.6.1",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
     "@terrestris/maven-semantic-release": "^3.0.1",
