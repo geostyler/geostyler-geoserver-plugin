@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.1...v1.5.2) (2025-10-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency dayjs to v1.11.18 ([bf7accb](https://github.com/geostyler/geostyler-geoserver-plugin/commit/bf7accb72c35db273b9e6b104e918311b89ba322))
+
 ## [1.5.1](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.0...v1.5.1) (2025-02-24)
 
 
