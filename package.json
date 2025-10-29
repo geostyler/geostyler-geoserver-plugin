@@ -38,7 +38,7 @@
   "dependencies": {
     "antd": "5.18.1",
     "dayjs": "1.11.18",
-    "geostyler": "14.1.4",
+    "geostyler": "14.2.0",
     "geostyler-geojson-parser": "1.0.1",
     "geostyler-sld-parser": "5.3.1",
     "geostyler-wfs-parser": "2.0.2",
