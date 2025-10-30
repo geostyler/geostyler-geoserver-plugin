@@ -39,7 +39,7 @@
     "@ant-design/icons": "^5.5.1",
     "antd": "5.27.6",
     "dayjs": "1.11.18",
-    "geostyler": "18.1.2",
+    "geostyler": "18.2.0",
     "geostyler-geojson-parser": "2.0.0",
     "geostyler-sld-parser": "8.1.0",
     "geostyler-wfs-parser": "3.0.1",
