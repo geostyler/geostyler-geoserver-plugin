@@ -1,4 +1,33 @@
-(function() {
+(function () {
+  /**
+   *  try to find CSP nonce from various places in the DOM
+  */
+  function guessNonce() {
+    var results = [];
+    var walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_ELEMENT,
+      null,
+      false
+    );
+    var node;
+    while ((node = walker.nextNode())) {
+      if (node.nonce || node.dataset.nonce) {
+        results.push({
+          tag: node.tagName,
+          id: node.id,
+          class: node.className,
+          nonce: node.nonce,
+          dataNonce: node.dataset.nonce
+        });
+      }
+    }
+    if (results.length > 0) {
+      return results[0].nonce || results[0].dataNonce;
+    }
+    return null;
+  }
+
   // get infos from GeoServer
   var layerNames = '${layer}';
   var layerType = '${layerType}';
@@ -19,9 +48,9 @@
   liveUpdateLabel.for = 'liveUpdate';
   liveUpdateLabel.innerHTML = 'Live preview enabled? ' +
     '(automatically saves the style on changes)';
-  geoStylerDiv.id = 'geoStylerDiv';
+  geoStylerDiv.id = 'geostyler-div';
   geoStylerDiv.innerHTML = 'GeoStyler is loading ...';
-  root.id = 'geoStyler';
+  root.id = 'geostyler-root';
 
   checkboxWrapper.appendChild(liveUpdateCheckbox);
   checkboxWrapper.appendChild(liveUpdateLabel);
@@ -45,9 +74,9 @@
 
   var dontTriggerGeoStylerStyleupdate = false;
 
-  var onChange = function(styleObj) {
+  var onChange = function (styleObj) {
     styleParser.writeStyle(styleObj)
-      .then(function(sld) {
+      .then(function (sld) {
         dontTriggerGeoStylerStyleupdate = true;
         codeMirror.setValue(sld.output);
         if (liveUpdateCheckbox.checked) {
@@ -86,32 +115,53 @@
    *
    * @param props {Object} The props to re-render the GeoStyler component
    */
-  var reRenderGeoStyler = function(props, contextValues) {
+  var reRenderGeoStyler = function (props, contextValues) {
     var fullScreen = document.getElementById('page').classList.contains('fullscreen');
     geoStylerProps = props;
     geoStylerContextValues = contextValues;
+
+    var nonce = guessNonce();
+
     var geostylerStyle = React.createElement(
       fullScreen ? GeoStyler.CardStyle : GeoStyler.Style,
       geoStylerProps
     );
+
     var geostylerContext = React.createElement(
       GeoStyler.GeoStylerContext.Provider,
       { value: geoStylerContextValues || {} },
       geostylerStyle
     );
-    GeoStyler.locale.de_DE.RuleFieldContainer.nameFieldLabel = 'GeoStyler';
-    reactRoot.render(geostylerContext);
-  };
 
-  // handle code editor changes and apply to GeoStyler
-  codeMirror.on('change', function() {
+    // Wrap with Ant Design ConfigProvider for CSP support
+    var finalComponent;
+    if (nonce && typeof antd !== 'undefined' && antd.ConfigProvider) {
+      finalComponent = React.createElement(
+        antd.ConfigProvider,
+        { csp: { nonce: nonce } },
+        geostylerContext
+      );
+    } else {
+      if (!nonce) {
+        console.warn('No CSP nonce found - using GeoStyler without Ant Design CSP config');
+      }
+      if (typeof antd === 'undefined' || !antd.ConfigProvider) {
+        console.warn('Ant Design ConfigProvider not available - using GeoStyler without CSP config');
+      }
+      finalComponent = geostylerContext;
+    }
+
+    GeoStyler.locale.de_DE.RuleFieldContainer.nameFieldLabel = 'GeoStyler';
+    reactRoot.render(finalComponent);
+  };  // handle code editor changes and apply to GeoStyler
+  codeMirror.on('change', function () {
     // avoid change resting the UI
     if (dontTriggerGeoStylerStyleupdate) {
       dontTriggerGeoStylerStyleupdate = false;
       return;
     }
     styleParser.readStyle(codeMirror.getValue())
-      .then(function(style) {
+      .then(function (style) {
         var props = Object.assign({}, geoStylerProps);
         props.style = style.output;
         reRenderGeoStyler(props, geoStylerContextValues);
@@ -127,7 +177,7 @@
   // fetch a feature when working on a vector layer
   var getFeaturePromise = Promise.resolve();
   if (layerType.toLowerCase() === 'vector') {
-    var wfsParser = new GeoStylerWfsParser.WfsDataParser();
+    var wfsParser = new WfsDataParser.WfsDataParser();
     getFeaturePromise = wfsParser.readData({
       url: window.location.origin + basePath,
       fetchParams: {
@@ -144,7 +194,7 @@
 
   // finally build the GeoStyler with the parsed style and feature, if available
   Promise.all([stylePromise, getFeaturePromise])
-    .then(function(response) {
+    .then(function (response) {
       geoStylerProps.style = response[0].output;
       geoStylerContextValues.data = response[1];
       reRenderGeoStyler(geoStylerProps, geoStylerContextValues);

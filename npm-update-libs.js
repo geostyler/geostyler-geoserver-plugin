@@ -28,7 +28,20 @@ const exec = utils.promisify(cp.exec);
       const version = pckJson.dependencies[packageName].replace(/~|\^/g, '');
       const packageInstallation = `${packageName}@${version}`;
       const packCmd = `npm pack ${packageInstallation} --pack-destination ${tmpDir}`;
-      const tarCmd = `tar -xzvf ${path.join(tmpDir, packageInstallation.replace('@', '-'))}.tgz --transform='s/package/${packageName}/g' -C ${tmpDir}`;
+
+      // Generate correct filename for scoped packages
+      // @ant-design/icons@5.5.1 becomes ant-design-icons-5.5.1.tgz
+      let tarFileName;
+      if (packageName.startsWith('@')) {
+        // Remove @ and replace / with -
+        tarFileName = `${packageName.substring(1).replace('/', '-')}-${version}.tgz`;
+      } else {
+        tarFileName = `${packageName}-${version}.tgz`;
+      }
+
+      // Escape packageName for transform expression (escape forward slashes only, not @)
+      const escapedPackageName = packageName.replace(/\//g, '\\/');
+      const tarCmd = `tar -xzvf ${path.join(tmpDir, tarFileName)} --transform='s/package/${escapedPackageName}/g' -C ${tmpDir}`;
 
       console.log('Packing library ' + packageInstallation);
 
@@ -61,6 +74,10 @@ const exec = utils.promisify(cp.exec);
       },
       {
         from: path.join(tmpDir, 'antd', 'dist', 'reset.css'),
+        to: targetDir
+      },
+      {
+        from: path.join(tmpDir, '@ant-design', 'icons', 'dist', 'index.umd.min.js'),
         to: targetDir
       },
       {

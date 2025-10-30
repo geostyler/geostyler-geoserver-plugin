@@ -123,8 +123,13 @@ public class GeoStyler extends Panel {
         // temporarily disable javascript compression since build resources are already
         // compressed
         GeoServerApplication.get().getResourceSettings().setJavaScriptCompressor(new NoOpTextCompressor());
-        header.render(CssHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/geostyler.css")));
+
+        // Load CSS files in the correct order: reset first, then antd styles, then
+        // geostyler
         header.render(CssHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/reset.css")));
+        header.render(CssHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/geostyler.css")));
+        header.render(CssHeaderItem.forReference(
+                new PackageResourceReference(GeoStyler.class, "css/geostyler-integration.css")));
         header.render(JavaScriptHeaderItem.forReference(
                 new PackageResourceReference(GeoStyler.class, "lib/react.production.min.js")));
         header.render(JavaScriptHeaderItem.forReference(
@@ -133,6 +138,9 @@ public class GeoStyler extends Panel {
                 JavaScriptHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/dayjs.min.js")));
         header.render(
                 JavaScriptHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/antd.min.js")));
+        // antd icons
+        header.render(JavaScriptHeaderItem.forReference(
+                new PackageResourceReference(GeoStyler.class, "lib/index.umd.min.js")));
         header.render(JavaScriptHeaderItem.forReference(new PackageResourceReference(GeoStyler.class, "lib/ol.js")));
         header.render(JavaScriptHeaderItem.forReference(
                 new PackageResourceReference(GeoStyler.class, "lib/geostyler.iife.js")));

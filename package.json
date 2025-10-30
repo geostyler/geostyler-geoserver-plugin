@@ -36,6 +36,7 @@
     "not ie < 9"
   ],
   "dependencies": {
+    "@ant-design/icons": "^5.5.1",
     "antd": "5.27.6",
     "dayjs": "1.11.18",
     "geostyler": "18.1.2",
