@@ -1,3 +1,14 @@
+## [1.5.7](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.6...v1.5.7) (2025-10-30)
+
+
+### Bug Fixes
+
+* add advanced csp-nonce handling ([fc986f4](https://github.com/geostyler/geostyler-geoserver-plugin/commit/fc986f49ffd63704d2e59d86f247d0c33d623185))
+* add antd icons and config provider ([76c100d](https://github.com/geostyler/geostyler-geoserver-plugin/commit/76c100d831f0c2a33de908fefaf886ade8455439))
+* **deps:** update geostyler to v18.2.0 ([c1859e4](https://github.com/geostyler/geostyler-geoserver-plugin/commit/c1859e46cff158ff265e6d1b86686f628531d541))
+* remove loop check ([a771857](https://github.com/geostyler/geostyler-geoserver-plugin/commit/a771857d6a1da9ceb6fa43b4e2c8a6254abe5581))
+* update geostyler lib pathes and node version ([ae44b08](https://github.com/geostyler/geostyler-geoserver-plugin/commit/ae44b0808e39f2d9b44f52b6b61341737e07c964))
+
 ## [1.5.6](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.5...v1.5.6) (2025-10-29)
 
 
