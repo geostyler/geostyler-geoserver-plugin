@@ -28,7 +28,60 @@
     return null;
   }
 
-  // get infos from GeoServer
+  /**
+ * Simple CSP nonce injection for all CSS-in-JS libraries
+ *
+ * Fixes CSP violations from Ant Design, @ant-design/icons and other CSS-in-JS
+ * libraries that dynamically create <style> tags. Patches createElement() and
+ * monitors DOM changes to automatically add CSP nonces to all style tags.
+ * Warning: React-DOM inline styles cannot be programmatically fixed and require
+ * 'unsafe-inline' in the CSP policy.
+ */
+  function setupCSPNonce() {
+    var nonce = guessNonce();
+    if (!nonce) return null;
+
+    // Set global nonce for Ant Design
+    window.__ANTD_CSP_NONCE__ = nonce;
+
+    // Patch createElement to auto-add nonce to style tags
+    var originalCreateElement = document.createElement;
+    document.createElement = function (tagName) {
+      var element = originalCreateElement.call(this, tagName);
+      if (tagName.toLowerCase() === 'style') {
+        element.nonce = nonce;
+      }
+      return element;
+    };
+
+    // Monitor for both style tags AND elements with inline styles
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1) { // ELEMENT_NODE
+            // Add nonce to style tags
+            if (node.tagName === 'STYLE' && !node.nonce) {
+              node.nonce = nonce;
+            }
+            // Find style tags in subtree
+            if (node.querySelectorAll) {
+              node.querySelectorAll('style:not([nonce])').forEach(function (style) {
+                style.nonce = nonce;
+              });
+            }
+          }
+        });
+      });
+    });
+
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    return nonce;
+  }
+
+  // Set up CSP nonce injection immediately
+  setupCSPNonce();
+
+  // Get infos from GeoServer
   var layerNames = '${layer}';
   var layerType = '${layerType}';
   var basePath = '${basePath}';
@@ -115,7 +168,6 @@
   var reRenderGeoStyler = function (props, contextValues) {
     var fullScreen = document.getElementById('page').classList.contains('fullscreen');
     geoStylerContextValues = contextValues;
-
     var nonce = guessNonce();
 
     var geostylerStyle = React.createElement(
@@ -129,23 +181,10 @@
       geostylerStyle
     );
 
-    // Wrap with Ant Design ConfigProvider for CSP support
-    var finalComponent;
-    if (nonce && typeof antd !== 'undefined' && antd.ConfigProvider) {
-      finalComponent = React.createElement(
-        antd.ConfigProvider,
-        { csp: { nonce: nonce } },
-        geostylerContext
-      );
-    } else {
-      if (!nonce) {
-        console.warn('No CSP nonce found - using GeoStyler without Ant Design CSP config');
-      }
-      if (typeof antd === 'undefined' || !antd.ConfigProvider) {
-        console.warn('Ant Design ConfigProvider not available - using GeoStyler without CSP config');
-      }
-      finalComponent = geostylerContext;
-    }
+    // Simple ConfigProvider with CSP nonce
+    var finalComponent = nonce && antd && antd.ConfigProvider
+      ? React.createElement(antd.ConfigProvider, { csp: { nonce: nonce } }, geostylerContext)
+      : geostylerContext;
 
     GeoStyler.locale.de_DE.RuleFieldContainer.nameFieldLabel = 'GeoStyler';
     reactRoot.render(finalComponent);

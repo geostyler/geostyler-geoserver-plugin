@@ -1,6 +1,7 @@
+/* Use system fonts to avoid CSP font-src violations */
 @font-face {
     font-family: Aldrich;
-    src: url('https://raw.githubusercontent.com/geostyler/geostyler-demo/master/src/assets/fonts/aldrich/aldrich-v8-latin-regular.woff2') format('woff2')
+    src: local('Arial Black'), local('Helvetica Neue Bold'), local('sans-serif');
 }
 
 #geoStyler {
@@ -10,7 +11,7 @@
 }
 
 #geoStylerTitle {
-    font-family: Aldrich,sans-serif;
+    font-family: Aldrich, sans-serif;
     color: #162162;
     display: block;
     font-size: 3em;
@@ -18,7 +19,7 @@
 }
 
 #checkboxwrapper {
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
