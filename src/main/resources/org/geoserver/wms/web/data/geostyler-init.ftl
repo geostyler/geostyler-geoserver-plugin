@@ -72,12 +72,9 @@
     }
   });
 
-  var dontTriggerGeoStylerStyleupdate = false;
-
   var onChange = function (styleObj) {
     styleParser.writeStyle(styleObj)
       .then(function (sld) {
-        dontTriggerGeoStylerStyleupdate = true;
         codeMirror.setValue(sld.output);
         if (liveUpdateCheckbox.checked) {
           // apply settings immediately
@@ -117,14 +114,13 @@
    */
   var reRenderGeoStyler = function (props, contextValues) {
     var fullScreen = document.getElementById('page').classList.contains('fullscreen');
-    geoStylerProps = props;
     geoStylerContextValues = contextValues;
 
     var nonce = guessNonce();
 
     var geostylerStyle = React.createElement(
       fullScreen ? GeoStyler.CardStyle : GeoStyler.Style,
-      geoStylerProps
+      props
     );
 
     var geostylerContext = React.createElement(
@@ -153,13 +149,10 @@
 
     GeoStyler.locale.de_DE.RuleFieldContainer.nameFieldLabel = 'GeoStyler';
     reactRoot.render(finalComponent);
-  };  // handle code editor changes and apply to GeoStyler
+  };
+
+  // handle code editor changes and apply to GeoStyler
   codeMirror.on('change', function () {
-    // avoid change resting the UI
-    if (dontTriggerGeoStylerStyleupdate) {
-      dontTriggerGeoStylerStyleupdate = false;
-      return;
-    }
     styleParser.readStyle(codeMirror.getValue())
       .then(function (style) {
         var props = Object.assign({}, geoStylerProps);
