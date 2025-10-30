@@ -11,7 +11,8 @@
     "Promise": false,
     "GeoStylerSLDParser": false,
     "GeoStyler": false,
-    "GeoStylerWfsParser": false,
+    "WfsDataParser": false,
+    "antd": false,
     "React": false,
     "ReactDOM": false,
     "$": false

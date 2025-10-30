@@ -28,7 +28,20 @@ const exec = utils.promisify(cp.exec);
       const version = pckJson.dependencies[packageName].replace(/~|\^/g, '');
       const packageInstallation = `${packageName}@${version}`;
       const packCmd = `npm pack ${packageInstallation} --pack-destination ${tmpDir}`;
-      const tarCmd = `tar -xzvf ${path.join(tmpDir, packageInstallation.replace('@', '-'))}.tgz --transform='s/package/${packageName}/g' -C ${tmpDir}`;
+
+      // Generate correct filename for scoped packages
+      // @ant-design/icons@5.5.1 becomes ant-design-icons-5.5.1.tgz
+      let tarFileName;
+      if (packageName.startsWith('@')) {
+        // Remove @ and replace / with -
+        tarFileName = `${packageName.substring(1).replace('/', '-')}-${version}.tgz`;
+      } else {
+        tarFileName = `${packageName}-${version}.tgz`;
+      }
+
+      // Escape packageName for transform expression (escape forward slashes only, not @)
+      const escapedPackageName = packageName.replace(/\//g, '\\/');
+      const tarCmd = `tar -xzvf ${path.join(tmpDir, tarFileName)} --transform='s/package/${escapedPackageName}/g' -C ${tmpDir}`;
 
       console.log('Packing library ' + packageInstallation);
 
@@ -64,27 +77,31 @@ const exec = utils.promisify(cp.exec);
         to: targetDir
       },
       {
+        from: path.join(tmpDir, '@ant-design', 'icons', 'dist', 'index.umd.min.js'),
+        to: targetDir
+      },
+      {
         from: path.join(tmpDir, 'ol', 'dist', 'ol.js'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler', 'browser', 'style.css'),
+        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.css'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.js.iife.js'),
+        from: path.join(tmpDir, 'geostyler', 'browser', 'geostyler.iife.js'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler-geojson-parser', 'browser', 'geoJsonDataParser.js'),
+        from: path.join(tmpDir, 'geostyler-geojson-parser', 'dist', 'geoJsonDataParser.iife.js'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler-sld-parser', 'browser', 'sldStyleParser.iife.js'),
+        from: path.join(tmpDir, 'geostyler-sld-parser', 'dist', 'sldStyleParser.iife.js'),
         to: targetDir
       },
       {
-        from: path.join(tmpDir, 'geostyler-wfs-parser', 'browser', 'wfsDataParser.js'),
+        from: path.join(tmpDir, 'geostyler-wfs-parser', 'dist', 'wfsDataParser.iife.js'),
         to: targetDir
       }
     ];

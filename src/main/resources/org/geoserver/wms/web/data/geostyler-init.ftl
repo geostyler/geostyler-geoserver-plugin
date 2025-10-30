@@ -1,5 +1,87 @@
-(function() {
-  // get infos from GeoServer
+(function () {
+  /**
+   *  try to find CSP nonce from various places in the DOM
+  */
+  function guessNonce() {
+    var results = [];
+    var walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_ELEMENT,
+      null,
+      false
+    );
+    var node;
+    while ((node = walker.nextNode())) {
+      if (node.nonce || node.dataset.nonce) {
+        results.push({
+          tag: node.tagName,
+          id: node.id,
+          class: node.className,
+          nonce: node.nonce,
+          dataNonce: node.dataset.nonce
+        });
+      }
+    }
+    if (results.length > 0) {
+      return results[0].nonce || results[0].dataNonce;
+    }
+    return null;
+  }
+
+  /**
+ * Simple CSP nonce injection for all CSS-in-JS libraries
+ *
+ * Fixes CSP violations from Ant Design, @ant-design/icons and other CSS-in-JS
+ * libraries that dynamically create <style> tags. Patches createElement() and
+ * monitors DOM changes to automatically add CSP nonces to all style tags.
+ * Warning: React-DOM inline styles cannot be programmatically fixed and require
+ * 'unsafe-inline' in the CSP policy.
+ */
+  function setupCSPNonce() {
+    var nonce = guessNonce();
+    if (!nonce) return null;
+
+    // Set global nonce for Ant Design
+    window.__ANTD_CSP_NONCE__ = nonce;
+
+    // Patch createElement to auto-add nonce to style tags
+    var originalCreateElement = document.createElement;
+    document.createElement = function (tagName) {
+      var element = originalCreateElement.call(this, tagName);
+      if (tagName.toLowerCase() === 'style') {
+        element.nonce = nonce;
+      }
+      return element;
+    };
+
+    // Monitor for both style tags AND elements with inline styles
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1) { // ELEMENT_NODE
+            // Add nonce to style tags
+            if (node.tagName === 'STYLE' && !node.nonce) {
+              node.nonce = nonce;
+            }
+            // Find style tags in subtree
+            if (node.querySelectorAll) {
+              node.querySelectorAll('style:not([nonce])').forEach(function (style) {
+                style.nonce = nonce;
+              });
+            }
+          }
+        });
+      });
+    });
+
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    return nonce;
+  }
+
+  // Set up CSP nonce injection immediately
+  setupCSPNonce();
+
+  // Get infos from GeoServer
   var layerNames = '${layer}';
   var layerType = '${layerType}';
   var basePath = '${basePath}';
@@ -19,9 +101,9 @@
   liveUpdateLabel.for = 'liveUpdate';
   liveUpdateLabel.innerHTML = 'Live preview enabled? ' +
     '(automatically saves the style on changes)';
-  geoStylerDiv.id = 'geoStylerDiv';
+  geoStylerDiv.id = 'geostyler-div';
   geoStylerDiv.innerHTML = 'GeoStyler is loading ...';
-  root.id = 'geoStyler';
+  root.id = 'geostyler-root';
 
   checkboxWrapper.appendChild(liveUpdateCheckbox);
   checkboxWrapper.appendChild(liveUpdateLabel);
@@ -43,12 +125,9 @@
     }
   });
 
-  var dontTriggerGeoStylerStyleupdate = false;
-
-  var onChange = function(styleObj) {
+  var onChange = function (styleObj) {
     styleParser.writeStyle(styleObj)
-      .then(function(sld) {
-        dontTriggerGeoStylerStyleupdate = true;
+      .then(function (sld) {
         codeMirror.setValue(sld.output);
         if (liveUpdateCheckbox.checked) {
           // apply settings immediately
@@ -86,32 +165,35 @@
    *
    * @param props {Object} The props to re-render the GeoStyler component
    */
-  var reRenderGeoStyler = function(props, contextValues) {
+  var reRenderGeoStyler = function (props, contextValues) {
     var fullScreen = document.getElementById('page').classList.contains('fullscreen');
-    geoStylerProps = props;
     geoStylerContextValues = contextValues;
+    var nonce = guessNonce();
+
     var geostylerStyle = React.createElement(
       fullScreen ? GeoStyler.CardStyle : GeoStyler.Style,
-      geoStylerProps
+      props
     );
+
     var geostylerContext = React.createElement(
       GeoStyler.GeoStylerContext.Provider,
       { value: geoStylerContextValues || {} },
       geostylerStyle
     );
+
+    // Simple ConfigProvider with CSP nonce
+    var finalComponent = nonce && antd && antd.ConfigProvider
+      ? React.createElement(antd.ConfigProvider, { csp: { nonce: nonce } }, geostylerContext)
+      : geostylerContext;
+
     GeoStyler.locale.de_DE.RuleFieldContainer.nameFieldLabel = 'GeoStyler';
-    reactRoot.render(geostylerContext);
+    reactRoot.render(finalComponent);
   };
 
   // handle code editor changes and apply to GeoStyler
-  codeMirror.on('change', function() {
-    // avoid change resting the UI
-    if (dontTriggerGeoStylerStyleupdate) {
-      dontTriggerGeoStylerStyleupdate = false;
-      return;
-    }
+  codeMirror.on('change', function () {
     styleParser.readStyle(codeMirror.getValue())
-      .then(function(style) {
+      .then(function (style) {
         var props = Object.assign({}, geoStylerProps);
         props.style = style.output;
         reRenderGeoStyler(props, geoStylerContextValues);
@@ -127,7 +209,7 @@
   // fetch a feature when working on a vector layer
   var getFeaturePromise = Promise.resolve();
   if (layerType.toLowerCase() === 'vector') {
-    var wfsParser = new GeoStylerWfsParser.WfsDataParser();
+    var wfsParser = new WfsDataParser.WfsDataParser();
     getFeaturePromise = wfsParser.readData({
       url: window.location.origin + basePath,
       fetchParams: {
@@ -144,7 +226,7 @@
 
   // finally build the GeoStyler with the parsed style and feature, if available
   Promise.all([stylePromise, getFeaturePromise])
-    .then(function(response) {
+    .then(function (response) {
       geoStylerProps.style = response[0].output;
       geoStylerContextValues.data = response[1];
       reRenderGeoStyler(geoStylerProps, geoStylerContextValues);
