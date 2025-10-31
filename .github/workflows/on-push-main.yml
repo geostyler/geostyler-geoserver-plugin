@@ -21,6 +21,18 @@ jobs:
     - name: Build artifacts 🏗️
       run: mvn clean package -B
 
+    - name: Get artifact filename 🪪
+      run: |
+        ARTIFACT_FILE="$(mvn help:evaluate -Dexpression=project.build.finalName -q -DforceStdout)-$(mvn help:evaluate -Dexpression=gs.version -q -DforceStdout).jar"
+        echo "artifact_file=$ARTIFACT_FILE" >> $GITHUB_ENV
+
+    - name: Package artifact as ZIP 🗜️
+      run: |
+        mkdir -p release
+        cp target/$artifact_file release/
+        cd release
+        zip "${artifact_file%.jar}.zip" "$artifact_file"
+
     - name: Create maven settings.xml with credentials
       uses: whelk-io/maven-settings-xml-action@v2
       with:
@@ -40,3 +52,11 @@ jobs:
           @semantic-release/git@10
       env:
         GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+
+    - name: Upload ZIP to GitHub Release ⬆️
+      if: steps.semantic.outputs.released == 'true'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: release/${artifact_file%.jar}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
