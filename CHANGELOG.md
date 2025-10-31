@@ -1,3 +1,10 @@
+## [1.5.9](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.8...v1.5.9) (2025-10-31)
+
+
+### Bug Fixes
+
+* upload artifact to release (if any) ([9286f0a](https://github.com/geostyler/geostyler-geoserver-plugin/commit/9286f0a4b21ddfa538928cf0fa6614cb7a3d7474))
+
 ## [1.5.8](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.7...v1.5.8) (2025-10-31)
 
 
