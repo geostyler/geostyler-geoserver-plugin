@@ -23,15 +23,15 @@ jobs:
 
     - name: Get artifact filename 🪪
       run: |
-        ARTIFACT_FILE="$(mvn help:evaluate -Dexpression=project.build.finalName -q -DforceStdout)-$(mvn help:evaluate -Dexpression=gs.version -q -DforceStdout).jar"
-        echo "artifact_file=$ARTIFACT_FILE" >> $GITHUB_ENV
+        ARTIFACT_ID="$(mvn help:evaluate -Dexpression=project.build.finalName -q -DforceStdout)-$(mvn help:evaluate -Dexpression=gs.version -q -DforceStdout)"
+        echo "ARTIFACT_ID=$ARTIFACT_ID" >> $GITHUB_ENV
 
     - name: Package artifact as ZIP 🗜️
       run: |
         mkdir -p release
-        cp target/$artifact_file release/
+        cp target/$ARTIFACT_ID.jar release/
         cd release
-        zip "${artifact_file%.jar}.zip" "$artifact_file"
+        zip "${ARTIFACT_ID}.zip" "${ARTIFACT_ID}.jar"
 
     - name: Create maven settings.xml with credentials
       uses: whelk-io/maven-settings-xml-action@v2
@@ -43,7 +43,7 @@ jobs:
 
     - name: Semantic release
       id: semantic
-      uses: cycjimmy/semantic-release-action@v3
+      uses: cycjimmy/semantic-release-action@v5
       with:
         semantic_version: 19
         extra_plugins: |
@@ -54,9 +54,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
 
     - name: Upload ZIP to GitHub Release ⬆️
-      if: steps.semantic.outputs.released == 'true'
+      if: steps.semantic.outputs.new_release_published == 'true'
       uses: softprops/action-gh-release@v2
       with:
-        files: release/${artifact_file%.jar}.zip
+        files: release/${{ env.ARTIFACT_ID }}.zip
+        tag_name: ${{ steps.semantic.outputs.new_release_version }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
