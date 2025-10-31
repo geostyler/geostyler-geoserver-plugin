@@ -1,3 +1,10 @@
+## [1.5.8](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.7...v1.5.8) (2025-10-31)
+
+
+### Bug Fixes
+
+* bring back naming convention as documented ([6841271](https://github.com/geostyler/geostyler-geoserver-plugin/commit/6841271fa361c4537a862c3101a12cd45eea0e4d))
+
 ## [1.5.7](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.6...v1.5.7) (2025-10-30)
 
 
