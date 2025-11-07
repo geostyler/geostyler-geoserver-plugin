@@ -58,6 +58,6 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: release/${{ env.ARTIFACT_ID }}.zip
-        tag_name: ${{ steps.semantic.outputs.new_release_version }}
+        tag_name: v${{ steps.semantic.outputs.new_release_version }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
