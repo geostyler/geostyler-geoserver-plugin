@@ -18,21 +18,6 @@ jobs:
         distribution: 'temurin'
         java-version: 17
 
-    - name: Build artifacts 🏗️
-      run: mvn clean package -B
-
-    - name: Get artifact filename 🪪
-      run: |
-        ARTIFACT_ID="$(mvn help:evaluate -Dexpression=project.build.finalName -q -DforceStdout)-$(mvn help:evaluate -Dexpression=gs.version -q -DforceStdout)"
-        echo "ARTIFACT_ID=$ARTIFACT_ID" >> $GITHUB_ENV
-
-    - name: Package artifact as ZIP 🗜️
-      run: |
-        mkdir -p release
-        cp target/$ARTIFACT_ID.jar release/
-        cd release
-        zip "${ARTIFACT_ID}.zip" "${ARTIFACT_ID}.jar"
-
     - name: Create maven settings.xml with credentials
       uses: whelk-io/maven-settings-xml-action@v2
       with:
@@ -52,6 +37,20 @@ jobs:
           @semantic-release/git@10
       env:
         GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+
+    - name: Get artifact filename 🪪
+      if: steps.semantic.outputs.new_release_published == 'true'
+      run: |
+        ARTIFACT_ID="$(mvn help:evaluate -Dexpression=project.build.finalName -q -DforceStdout)-$(mvn help:evaluate -Dexpression=gs.version -q -DforceStdout)"
+        echo "ARTIFACT_ID=$ARTIFACT_ID" >> $GITHUB_ENV
+
+    - name: Package artifact as ZIP 🗜️
+      if: steps.semantic.outputs.new_release_published == 'true'
+      run: |
+        mkdir -p release
+        cp target/$ARTIFACT_ID.jar release/
+        cd release
+        zip "${ARTIFACT_ID}.zip" "${ARTIFACT_ID}.jar"
 
     - name: Upload ZIP to GitHub Release ⬆️
       if: steps.semantic.outputs.new_release_published == 'true'
