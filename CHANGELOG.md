@@ -1,3 +1,10 @@
+## [1.5.12](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.11...v1.5.12) (2025-11-07)
+
+
+### Bug Fixes
+
+* get artifact after the release ([c7d4aed](https://github.com/geostyler/geostyler-geoserver-plugin/commit/c7d4aed22ee51842ce453d1de4f0684a3207aef9))
+
 ## [1.5.11](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.10...v1.5.11) (2025-11-07)
 
 
