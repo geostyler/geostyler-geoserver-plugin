@@ -1,3 +1,10 @@
+## [1.5.11](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.10...v1.5.11) (2025-11-07)
+
+
+### Bug Fixes
+
+* set correct tag name and make use of GH_RELEASE_TOKEN ([cd1ea3f](https://github.com/geostyler/geostyler-geoserver-plugin/commit/cd1ea3f589768f5589bec19b91848d9b48e2f29b))
+
 ## [1.5.10](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.9...v1.5.10) (2025-11-03)
 
 
