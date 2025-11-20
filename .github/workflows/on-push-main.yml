@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout sources 🔰
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Set up Java 📐
       uses: actions/setup-java@v5
