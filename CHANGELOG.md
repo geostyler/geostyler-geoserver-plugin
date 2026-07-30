@@ -1,3 +1,10 @@
+## [1.5.13](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.12...v1.5.13) (2026-07-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency org.geoserver:geoserver to v2.28.4 ([ef56142](https://github.com/geostyler/geostyler-geoserver-plugin/commit/ef56142573348cb51aa41ff048894905962b13fe))
+
 ## [1.5.12](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.11...v1.5.12) (2025-11-07)
 
 
