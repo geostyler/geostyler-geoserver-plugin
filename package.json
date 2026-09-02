@@ -41,7 +41,7 @@
     "dayjs": "1.11.21",
     "geostyler": "18.6.0",
     "geostyler-geojson-parser": "2.0.0",
-    "geostyler-sld-parser": "8.4.0",
+    "geostyler-sld-parser": "9.0.3",
     "geostyler-wfs-parser": "3.0.1",
     "ol": "10.10.0",
     "react": "18.3.1",
