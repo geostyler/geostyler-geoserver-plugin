@@ -1,3 +1,10 @@
+## [1.5.15](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.14...v1.5.15) (2026-11-26)
+
+
+### Bug Fixes
+
+* update to latest GeoServer (2) and cleanup pipeline ([920a763](https://github.com/geostyler/geostyler-geoserver-plugin/commit/920a763e88910a2fafd1378cd702705243ed1c1a))
+
 ## [1.5.14](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.13...v1.5.14) (2026-08-04)
 
 
