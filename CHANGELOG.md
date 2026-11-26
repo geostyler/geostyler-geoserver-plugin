@@ -1,3 +1,10 @@
+## [1.5.17](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.16...v1.5.17) (2026-11-26)
+
+
+### Bug Fixes
+
+* adjust name of .jar files to match new structure ([dba8096](https://github.com/geostyler/geostyler-geoserver-plugin/commit/dba8096b3c9ed131bde13cf0295c9c453cd504a9))
+
 ## [1.5.16](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.15...v1.5.16) (2026-11-26)
 
 

@@ -11,7 +11,7 @@
 
   <groupId>org.geoserver.community</groupId>
   <artifactId>gs-geostyler</artifactId>
-  <version>1.5.16</version>
+  <version>1.5.17</version>
 
   <packaging>jar</packaging>
 
