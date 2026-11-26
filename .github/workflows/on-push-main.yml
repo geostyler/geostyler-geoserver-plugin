@@ -39,7 +39,7 @@ jobs:
     - name: Get artifact filename 🪪
       if: steps.semantic.outputs.new_release_published == 'true'
       run: |
-        ARTIFACT_ID="$(mvn help:evaluate -Dexpression=project.build.finalName -q -DforceStdout)-$(mvn help:evaluate -Dexpression=gs.version -q -DforceStdout)"
+        ARTIFACT_ID="geoserver-$(mvn help:evaluate -Dexpression=gs.version -q -DforceStdout)-geostyler-plugin"
         echo "ARTIFACT_ID=$ARTIFACT_ID" >> $GITHUB_ENV
 
     - name: Package artifact as ZIP 🗜️
