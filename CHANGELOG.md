@@ -1,3 +1,10 @@
+## [1.5.16](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.15...v1.5.16) (2026-11-26)
+
+
+### Bug Fixes
+
+* rename artifact for simpler usage in geoserver ([4b0a9da](https://github.com/geostyler/geostyler-geoserver-plugin/commit/4b0a9dada7a2d5b27b77f259e9957ea3c8779239))
+
 ## [1.5.15](https://github.com/geostyler/geostyler-geoserver-plugin/compare/v1.5.14...v1.5.15) (2026-11-26)
 
 
