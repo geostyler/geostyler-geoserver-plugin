@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,14 +24,6 @@ jobs:
         distribution: 'temurin'
         java-version: 17
 
-    - name: Create maven settings.xml with credentials
-      uses: whelk-io/maven-settings-xml-action@v2
-      with:
-        servers: |
-          [
-            { "id": "nexus.terrestris.de-releases", "username": "${{ secrets.NEXUS_USER }}", "password": "${{ secrets.NEXUS_PASSWORD }}" }
-          ]
-
     - name: Semantic release
       id: semantic
       uses: cycjimmy/semantic-release-action@v5
@@ -36,7 +34,7 @@ jobs:
           @terrestris/maven-semantic-release@2
           @semantic-release/git@10
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Get artifact filename 🪪
       if: steps.semantic.outputs.new_release_published == 'true'
@@ -59,4 +57,4 @@ jobs:
         files: release/${{ env.ARTIFACT_ID }}.zip
         tag_name: v${{ steps.semantic.outputs.new_release_version }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
