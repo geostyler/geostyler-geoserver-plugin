@@ -15,10 +15,6 @@ To install the extension to your GeoServer just proceed as follows:
 1. Extract the contents to your `WEB-INF/lib` directory of your GeoServer installation.
 1. Restart GeoServer.
 
-## Maven artifact
-
-Additionally the build artifacts are also available in a [Nexus repository](https://nexus.terrestris.de/#browse/browse:geoserver-extras:org%2Fgeoserver%2Fcommunity%2Fgs-geostyler) e.g. to be included in custom builds.
-
 ## Development 🏗️
 
 Basically the plugin just includes the JavaScript resources of the GeoStyler into
