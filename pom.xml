@@ -94,6 +94,7 @@
   </repositories>
 
   <build>
+    <finalName>geoserver-${gs.version}-geostyler-plugin</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
